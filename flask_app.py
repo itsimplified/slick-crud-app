@@ -10,7 +10,8 @@ app = Flask(__name__)
 def sql_database():
     from functions.sqlquery import sql_query
     results = sql_query(''' SELECT * FROM data_table''')
-    return render_template('sqldatabase.html', results=results)   
+    msg = 'SELECT * FROM data_table'
+    return render_template('sqldatabase.html', results=results, msg=msg)   
 @app.route('/insert',methods = ['POST', 'GET']) #this is when user submits an insert
 def sql_datainsert():
     from functions.sqlquery import sql_edit_insert, sql_query
