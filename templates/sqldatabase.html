@@ -7,6 +7,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     </head>
    <body>
+       
         <div class ='row'>
             <div style='margin-left:100px;'>
             <img src = 'http://www.itsimplified-ms.com/posts/photos/databases.png'>
@@ -28,7 +29,6 @@
 
         {% for eresult in eresults %}
 
-        <!-- goes to the edit app route of the app -->
         <form action = "edit" method = "POST">
          <p>First Name: <input class="form-control" type = "text" name = "first_name" style='width: 100%;' value='{{eresult["first_name"]}}'/></p>
          <p>Last Name: <input class="form-control" type = "text" name = "last_name" style='width: 100%;' value='{{eresult["last_name"]}}' /></p>
@@ -52,7 +52,7 @@
         <div class="alert alert-info" role="alert">
         <strong>Your turn!</strong> Insert your new data line with this form ...
         </div>
-        <!-- goes to the insert app route of the app -->
+        
         <form action = "insert" method = "POST">
          <p>First Name: <input class="form-control" type = "text" name = "first_name" style='width: 100%;' /></p>
          <p>Last Name: <input class="form-control" type = "text" name = "last_name" style='width: 100%;' /></p>
@@ -107,8 +107,8 @@
                <td>{{result['city']}}</td>
                <td>{{result['state']}}</td>
                <td>{{result['zip']}}</td>
-               <td align="center"><a href = '{{ url_for('sql_editlink', efname=result['first_name'], elname=result['last_name']) }}'><i class="fas fa-edit"></a></td>
-               <td align="center"><a href = "delete?fname={{result['first_name']}}&lname={{result['last_name']}}"><i class="fas fa-trash-alt"></a></td>
+               <td align="center"><a href = "{{ url_for('sql_editlink', efname=result['first_name'], elname=result['last_name']) }}"><i class="fas fa-edit"></a></td>
+               <td align="center"><a href = "{{ url_for('sql_datadelete', fname=result['first_name'], lname=result['last_name']) }}"><i class="fas fa-trash-alt"></a></td>
             </tr>
          {% endfor %}
       </table>
