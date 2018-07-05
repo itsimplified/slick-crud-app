@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 @app.route('/') 
 def sql_database():
-    from functions.SQLquery import sql_query
+    from functions.sqlquery import sql_query
     results = sql_query(''' SELECT * FROM data_table''')
     return render_template('sqldatabase.html', results=results)   
 @app.route('/insert',methods = ['POST', 'GET']) #this is when user submits an insert
 def sql_datainsert():
-    from functions.SQLquery import sql_edit_insert, sql_query
+    from functions.sqlquery import sql_edit_insert, sql_query
     if request.method == 'POST':
         last_name = request.form['last_name']
         first_name = request.form['first_name']
@@ -27,7 +27,7 @@ def sql_datainsert():
     return render_template('sqldatabase.html', results=results, msg=msg) 
 @app.route('/delete',methods = ['POST', 'GET']) #this is when user clicks delete link
 def sql_datadelete():
-    from functions.SQLquery import sql_delete, sql_query
+    from functions.sqlquery import sql_delete, sql_query
     if request.method == 'GET':
         lname = request.args.get('lname')
         fname = request.args.get('fname')
@@ -37,7 +37,7 @@ def sql_datadelete():
     return render_template('sqldatabase.html', results=results, msg=msg)
 @app.route('/query_edit',methods = ['POST', 'GET']) #this is when user clicks edit link
 def sql_editlink():
-    from functions.SQLquery import sql_query, sql_query2
+    from functions.sqlquery import sql_query, sql_query2
     if request.method == 'GET':
         elname = request.args.get('elname')
         efname = request.args.get('efname')
@@ -46,7 +46,7 @@ def sql_editlink():
     return render_template('sqldatabase.html', eresults=eresults, results=results)
 @app.route('/edit',methods = ['POST', 'GET']) #this is when user submits an edit
 def sql_dataedit():
-    from functions.SQLquery import sql_edit_insert, sql_query
+    from functions.sqlquery import sql_edit_insert, sql_query
     if request.method == 'POST':
         old_last_name = request.form['old_last_name']
         old_first_name = request.form['old_first_name']
