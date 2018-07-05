@@ -1,0 +1,117 @@
+<html>
+    <head>
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </head>
+   <body>
+        <div class ='row'>
+            <div style='margin-left:100px;'>
+            <img src = 'http://www.itsimplified-ms.com/posts/photos/databases.png'>
+            </div>
+            <div style='padding-top: 20px; padding-left:20px;'><h3>
+             A Slick CRUD Application Built Using Python With Flask and SQLite3 to Teach Simple mySQL Queries
+            </h3></div>
+        </div> <!--ends intro -->
+
+        <br>
+       <div class ='row'>
+
+        {% block content %}
+        {% if 'query_edit' in request.url %}
+        <div style='margin-left: 100px; width: 45%;'>
+        <div class="alert alert-info" role="alert">
+         <strong>Your turn!</strong> Edit your selected data line here ...
+        </div>
+
+        {% for eresult in eresults %}
+
+        <!-- goes to the edit app route of the app -->
+        <form action = "edit" method = "POST">
+         <p>First Name: <input class="form-control" type = "text" name = "first_name" style='width: 100%;' value='{{eresult["first_name"]}}'/></p>
+         <p>Last Name: <input class="form-control" type = "text" name = "last_name" style='width: 100%;' value='{{eresult["last_name"]}}' /></p>
+         <p>Address: <input class="form-control" type = "text" name = "address" style='width: 100%;' value='{{eresult["address"]}}' /></p>
+         <p>City: <input class="form-control" type = "text" name = "city" style='width: 100%;' value='{{eresult["city"]}}' /></p>
+         <p>State: <input class="form-control" type ="text" name = "state" style='width: 100%;' value='{{eresult["state"]}}' /></p>
+         <p>Zip: <input class="form-control" type ="text" name = "zip" style='width: 100%;' value='{{eresult["zip"]}}' /></p>
+         <input type ="hidden" name = "old_first_name" value='{{eresult["first_name"]}}' />
+         <input type ="hidden" name = "old_last_name" value='{{eresult["last_name"]}}' />
+
+         {% endfor %}
+
+         <br>
+
+         <p><input class="btn-primary" type = "submit" value = "Update Data" /></p>
+        </form>
+        </div>
+
+        {% else %}
+        <div style='margin-left: 100px; width: 45%;'>
+        <div class="alert alert-info" role="alert">
+        <strong>Your turn!</strong> Insert your new data line with this form ...
+        </div>
+        <!-- goes to the insert app route of the app -->
+        <form action = "insert" method = "POST">
+         <p>First Name: <input class="form-control" type = "text" name = "first_name" style='width: 100%;' /></p>
+         <p>Last Name: <input class="form-control" type = "text" name = "last_name" style='width: 100%;' /></p>
+         <p>Address: <input class="form-control" type = "text" name = "address" style='width: 100%;' /></p>
+         <p>City: <input class="form-control" type = "text" name = "city" style='width: 100%;' /></p>
+         <p>State: <input class="form-control" type ="text" name = "state" style='width: 100%;' /></p>
+         <p>Zip: <input class="form-control" type ="text" name = "zip" style='width: 100%;' /></p>
+         <br>
+
+         <p><input class="btn-primary" type = "submit" value = "Insert Data" /></p>
+        </form>
+        </div>
+
+
+        {% endif %}
+        {% endblock content %}
+
+        <div style='margin-left: 20px; width: 45%;'>
+        <div class="alert alert-warning" role="alert">
+         <strong>Awesome!</strong> Here is your mySQL code ...
+        </div>
+        {{msg}}
+        </div>
+
+        </div> <!-- ends row div -->
+
+      <br><br>
+
+        <div class="alert alert-success" role="alert" style='width: 90%; margin-left: 100px;'>
+        <strong>Check it out!</strong> Here is your data table below ...
+        </div>
+
+      <table class = 'table table-hover' style = 'margin-left: 100px; margin-right: 100px; width: 90%;'>
+         <thead>
+            <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+            </tr>
+         </thead>
+
+         {% for result in results %}
+            <tr>
+               <td>{{result["first_name"]}}</td>
+               <td>{{result["last_name"]}}</td>
+               <td>{{result["address"]}}</td>
+               <td>{{result['city']}}</td>
+               <td>{{result['state']}}</td>
+               <td>{{result['zip']}}</td>
+               <td align="center"><a href = '{{ url_for('sql_editlink', efname=result['first_name'], elname=result['last_name']) }}'><i class="fas fa-edit"></a></td>
+               <td align="center"><a href = "delete?fname={{result['first_name']}}&lname={{result['last_name']}}"><i class="fas fa-trash-alt"></a></td>
+            </tr>
+         {% endfor %}
+      </table>
+
+    </body>
+</html>
