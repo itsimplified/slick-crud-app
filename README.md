@@ -8,3 +8,6 @@ This application is meant to be simple for demonstration purposes only.  The goa
 
 ### Trying Out the App Online:
 For your convenience, you can try out the app on our website hosted by pythonanywhere.com: https://goo.gl/wqRQZV
+
+### To Learn More:
+To learn more about this app, read my blog posts on Quora at https://slick-crud-app.quora.com/ or Medium at https://goo.gl/T6UF9Y
